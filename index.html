@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<script>
+// Motor de A/B test — decide a variante ANTES do body renderizar, pra não ter flash de texto trocando.
+(function(){
+  try {
+    var v = localStorage.getItem('abVariant');
+    if (v !== 'a' && v !== 'b') { v = Math.random() < 0.5 ? 'a' : 'b'; localStorage.setItem('abVariant', v); }
+    document.documentElement.setAttribute('data-variant', v);
+  } catch (e) { document.documentElement.setAttribute('data-variant', 'a'); }
+})();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Máquina — Gestão de Tráfego Pago que Vira Lucro</title>
+<meta name="description" content="Gestão de tráfego pago (Meta, Google e TikTok Ads) com acompanhamento diário e resultado real. Diagnóstico 100% grátis — vagas limitadas.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%231D1D1F'/%3E%3Cstop offset='.6' stop-color='%232C2C2E'/%3E%3Cstop offset='1' stop-color='%233A3A3C'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='16' fill='url(%23g)'/%3E%3Ccircle cx='11' cy='10' r='5' fill='white' fill-opacity='.35'/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Máquina — Gestão de Tráfego Pago que Vira Lucro">
+<meta property="og:description" content="Gestão de tráfego pago (Meta, Google e TikTok Ads) com acompanhamento diário e resultado real. Diagnóstico 100% grátis — vagas limitadas.">
+<meta property="og:url" content="https://vetor-landing.vercel.app">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Máquina — Gestão de Tráfego Pago que Vira Lucro">
+<meta name="twitter:description" content="Gestão de tráfego pago (Meta, Google e TikTok Ads) com acompanhamento diário e resultado real. Diagnóstico 100% grátis — vagas limitadas.">
+<link rel="canonical" href="https://vetor-landing.vercel.app/">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#1D1D1F">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Máquina",
+  "url": "https://vetor-landing.vercel.app/",
+  "inLanguage": "pt-BR"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Máquina",
+  "description": "Gestão de tráfego pago (Meta, Google e TikTok Ads) com acompanhamento diário e dashboard exclusiva em tempo real.",
+  "url": "https://vetor-landing.vercel.app/",
+  "telephone": "+5511962158598",
+  "areaServed": "BR",
+  "priceRange": "$$",
+  "sameAs": []
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Já tentei tráfego pago antes e não deu certo. Por que seria diferente?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Na maioria das vezes o problema não é 'tráfego pago não funciona' — é falta de método: criativo não testado, conta sem rastreamento correto, ninguém otimizando todo dia. No diagnóstico mostramos exatamente onde a operação está sangrando dinheiro." }
+    },
+    {
+      "@type": "Question",
+      "name": "Tem contrato de fidelidade?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Não. O trabalho é mês a mês. O cliente continua porque está vendo resultado — não porque assinou um contrato que o prende." }
+    },
+    {
+      "@type": "Question",
+      "name": "Preciso de quanto de investimento pra começar?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Não existe número mágico igual pra todo mundo. No diagnóstico gratuito analisamos o mercado do cliente e indicamos o investimento ideal pro momento dele." }
+    },
+    {
+      "@type": "Question",
+      "name": "Em quanto tempo aparece resultado?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Os primeiros ajustes começam a rodar já na primeira semana. Resultado consistente de ROAS geralmente aparece entre 30 e 60 dias, variando com o mercado e o histórico da conta." }
+    },
+    {
+      "@type": "Question",
+      "name": "Atendem qualquer nicho?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Já foram operados e-commerce, clínicas, infoprodutos e serviços B2B. No diagnóstico é avaliado se o mercado do cliente tem fit com o método antes de qualquer promessa." }
+    }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;600;700;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1502350164138584');
+fbq('init', '629749061807777');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1502350164138584&ev=PageView&noscript=1"/></noscript>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=629749061807777&ev=PageView&noscript=1"/></noscript>
+</head>
+<body>
+
+
+<div class="page">
+
+  <!-- FUNDO DECORATIVO: esferas + cápsulas de vidro líquido -->
+  <div class="bg-decor" aria-hidden="true">
+    <div class="wash wash-1" data-parallax="0.1"></div>
+    <div class="wash wash-2" data-parallax="-0.08"></div>
+    <div class="wash wash-3" data-parallax="0.07"></div>
+
+    <div class="capsule capsule-1" data-parallax="0.16"><span></span></div>
+    <div class="capsule capsule-2" data-parallax="-0.13"><span></span></div>
+    <div class="capsule capsule-3" data-parallax="0.14"><span></span></div>
+    <div class="capsule capsule-4" data-parallax="-0.11"><span></span></div>
+    <div class="capsule capsule-5" data-parallax="0.12"><span></span></div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-pill glass-panel shine">
+      <span class="shine-bar"></span>
+      <a href="#" class="brand">
+        <span class="brand-dot"></span>
+        <span class="brand-name">Máquina</span>
+        <span class="brand-kicker">Tráfego</span>
+      </a>
+      <a href="https://wa.me/5511962158598" target="_blank" rel="noopener" class="btn btn-primary btn-sm shine">
+        <span class="shine-bar"></span>
+        <span class="nav-cta-full">Garantir minha vaga</span>
+        <span class="nav-cta-short">Vaga</span>
+      </a>
+    </div>
+  </nav>
+
+  <main>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <div class="badge glass-panel-light silver-frame">
+          <span class="pulse-dot"></span>
+          <span>Julho 2026 — Só restam 4 vagas essa semana</span>
+        </div>
+
+        <h1 class="h1">
+          <span class="variant-a">Tráfego pago que vira <span class="gradient-text">dinheiro de verdade.</span></span>
+          <span class="variant-b">Pare de <span class="gradient-text">queimar dinheiro</span> com anúncio que não vende.</span>
+        </h1>
+
+        <p class="lead">A Máquina assume, ataca e escala seus anúncios no Meta, Google e TikTok — com criativo agressivo, dado que não mente e estratégia sem enrolação, mirando numa métrica só: <strong>o seu lucro.</strong></p>
+
+        <div class="hero-ctas">
+          <a href="#diagnostico" class="btn btn-primary btn-lg shine" id="hero-primary-cta">
+            <span class="shine-bar"></span>
+            <span class="variant-a">Quero faturar mais, agora</span>
+            <span class="variant-b">Quero parar de perder dinheiro</span>
+            <span class="arrow">→</span>
+          </a>
+          <a href="#resultados" class="btn btn-glass btn-lg">Ver prova real</a>
+        </div>
+
+        <p class="trust-line">100% gratuito &nbsp;·&nbsp; Zero fidelidade &nbsp;·&nbsp; Resposta em até 24h</p>
+      </div>
+
+      <!-- COMPOSIÇÃO 3D: iPhone + ícones flutuantes -->
+      <div class="hero-visual" data-tilt-stage>
+        <div class="sphere sphere-a" data-parallax="-0.03"></div>
+        <div class="sphere sphere-b" data-parallax="-0.06"></div>
+        <div class="sphere sphere-c" data-parallax="-0.045"></div>
+
+        <div class="phone-wrap">
+          <div class="phone" data-tilt>
+            <div class="phone-bezel">
+              <div class="dynamic-island"></div>
+              <div class="status-bar">
+                <span>9:41</span>
+                <span class="status-icons">
+                  <svg aria-hidden="true" width="16" height="11" viewBox="0 0 19 12" fill="#fff"><rect x="0" y="7.5" width="3.2" height="4.5" rx="0.7"/><rect x="4.8" y="5" width="3.2" height="7" rx="0.7"/><rect x="9.6" y="2.5" width="3.2" height="9.5" rx="0.7"/><rect x="14.4" y="0" width="3.2" height="12" rx="0.7"/></svg>
+                  <svg aria-hidden="true" width="22" height="11" viewBox="0 0 27 13" fill="none"><rect x="0.5" y="0.5" width="23" height="12" rx="3.5" stroke="#fff" stroke-opacity="0.4"/><rect x="2" y="2" width="20" height="9" rx="2" fill="#fff"/></svg>
+                </span>
+              </div>
+              <div class="phone-screen">
+                <div class="ps-header">
+                  <div>
+                    <div class="ps-date">Ter, 30 de junho</div>
+                    <div class="ps-title">Desempenho</div>
+                  </div>
+                  <div class="ps-avatar"></div>
+                </div>
+
+                <div class="ps-card ps-revenue">
+                  <div class="ps-label">Faturamento hoje</div>
+                  <div class="ps-revenue-row">
+                    <span class="ps-revenue-value">R$ 48.240</span>
+                    <span class="ps-delta">▲ 32%</span>
+                  </div>
+                  <div class="ps-sub">vs. ontem no mesmo horário</div>
+                </div>
+
+                <div class="ps-two-up">
+                  <div class="ps-card">
+                    <div class="ps-label">ROAS</div>
+                    <div class="ps-metric">5,4x <span class="ps-up">▲</span></div>
+                  </div>
+                  <div class="ps-card">
+                    <div class="ps-label">CPA</div>
+                    <div class="ps-metric">R$ 12,80</div>
+                  </div>
+                </div>
+
+                <div class="ps-card">
+                  <div class="ps-label ps-chart-label">Vendas — últimos 7 dias</div>
+                  <div class="ps-bars">
+                    <div style="height:38%"></div>
+                    <div style="height:52%"></div>
+                    <div style="height:44%"></div>
+                    <div style="height:64%"></div>
+                    <div style="height:58%"></div>
+                    <div style="height:78%"></div>
+                    <div class="ps-bar-highlight" style="height:100%"></div>
+                  </div>
+                  <div class="ps-days"><span>Q</span><span>Q</span><span>S</span><span>S</span><span>D</span><span>S</span><span>T</span></div>
+                </div>
+
+                <div class="ps-card ps-channels">
+                  <div class="ps-channel-row">
+                    <span class="ps-dot" style="background:var(--lg1)"></span>
+                    <span class="ps-channel-name">Meta Ads</span>
+                    <span class="ps-channel-spend">R$ 28,4k</span>
+                    <span class="ps-channel-roas">6,1x</span>
+                  </div>
+                  <div class="ps-channel-row">
+                    <span class="ps-dot" style="background:var(--lg3)"></span>
+                    <span class="ps-channel-name">Google Ads</span>
+                    <span class="ps-channel-spend">R$ 15,2k</span>
+                    <span class="ps-channel-roas">4,8x</span>
+                  </div>
+                  <div class="ps-channel-row ps-channel-row-last">
+                    <span class="ps-dot" style="background:var(--lg2)"></span>
+                    <span class="ps-channel-name">TikTok Ads</span>
+                    <span class="ps-channel-spend">R$ 4,6k</span>
+                    <span class="ps-channel-roas">3,9x</span>
+                  </div>
+                </div>
+              </div>
+              <div class="home-indicator"></div>
+            </div>
+          </div>
+          <div class="phone-shadow"></div>
+        </div>
+
+        <!-- ícones 3D em vidro -->
+        <div class="float-icon icon-rocket" data-parallax="-0.05"><span>🚀</span></div>
+        <div class="float-icon icon-chart" data-parallax="-0.09"><span>📈</span></div>
+        <div class="float-icon icon-target" data-parallax="-0.03"><span>🎯</span></div>
+        <div class="live-pill glass-panel-light" data-parallax="-0.07">
+          <span class="pulse-dot"></span>
+          <span>+R$ 8,4k <em>na última hora</em></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CALCULADORA INTERATIVA -->
+  <section id="calculadora" class="section">
+    <div class="section-inner">
+      <div class="sphere sphere-calc" data-parallax="-0.03"></div>
+
+      <div class="section-head" data-reveal>
+        <div class="eyebrow">Calculadora rápida</div>
+        <h2 class="h2">Quantos cliques a mais você teria pelo mesmo dinheiro?</h2>
+        <p class="section-lead">Arrasta o slider com o que você investe hoje em anúncios por mês e compara com o CPC de uma campanha real sob nossa gestão.</p>
+      </div>
+
+      <div class="calc-card glass-panel" data-reveal>
+        <label class="calc-slider-label" for="calc-spend">
+          <span>Investimento mensal em anúncios</span>
+          <span class="calc-spend-value" id="calc-spend-value">R$ 10.000</span>
+        </label>
+        <input type="range" id="calc-spend" class="calc-slider" min="1000" max="100000" step="500" value="10000" aria-label="Investimento mensal em anúncios">
+
+        <div class="calc-results">
+          <div class="calc-result-card">
+            <div class="calc-result-label">Cliques pelo CPC médio do mercado (R$ 1,20)</div>
+            <div class="calc-result-value" id="calc-potential">8.333 cliques</div>
+            <div class="calc-result-sub">referência pública do setor pra Meta Ads no Brasil</div>
+          </div>
+          <div class="calc-result-card calc-result-highlight">
+            <div class="calc-result-label">Cliques a mais com nosso CPC real (R$ 0,44)</div>
+            <div class="calc-result-value" id="calc-loss">+13.393<span> cliques</span></div>
+            <div class="calc-result-sub">CPC de uma campanha ativa sob gestão — não é média de todas as contas</div>
+          </div>
+        </div>
+
+        <a href="#diagnostico" class="btn btn-primary btn-lg btn-block shine calc-cta">
+          <span class="shine-bar"></span>
+          Quero pagar menos por clique <span class="arrow">→</span>
+        </a>
+        <p class="calc-disclaimer">Estimativa educativa comparando o CPC médio de mercado (referência pública do setor) com o CPC de uma campanha real sob gestão da Máquina. Resultado real varia conforme nicho, criativo e histórico de conta — sem garantia.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section id="servicos" class="section">
+    <div class="section-inner">
+      <div class="sphere sphere-f" data-parallax="-0.03"></div>
+      <div class="sphere sphere-g" data-parallax="-0.05"></div>
+
+      <div class="section-head" data-reveal>
+        <div class="eyebrow">O que você leva pra casa</div>
+        <h2 class="h2">Tudo o que separa seu anúncio do seu lucro.</h2>
+        <p class="section-lead">Um time inteiro de performance só pra sua conta — não um freelancer solitário apertando botão no susto.</p>
+      </div>
+
+      <div class="cards-grid" data-reveal>
+        <div class="glass-panel service-card shine tilt-card">
+          <span class="shine-bar"></span>
+          <div class="icon-chip"><span>🎯</span></div>
+          <h3 class="h3">Gestão de Tráfego Pago</h3>
+          <p>Meta, Google, TikTok e LinkedIn Ads operados todo santo dia por gestores certificados — afiados pra lucro, não pra vaidade de curtida.</p>
+        </div>
+        <div class="glass-panel service-card shine tilt-card">
+          <span class="shine-bar"></span>
+          <div class="icon-chip"><span>🎬</span></div>
+          <h3 class="h3">Criativos de Performance</h3>
+          <p>Testes semanais de ângulos, ganchos e formatos até achar o que faz seu concorrente suar. O criativo certo derruba seu custo por venda — a gente caça ele com método.</p>
+        </div>
+        <div class="glass-panel service-card shine tilt-card">
+          <span class="shine-bar"></span>
+          <div class="icon-chip"><span>📊</span></div>
+          <h3 class="h3">Dados &amp; Rastreamento</h3>
+          <p>Dashboard em tempo real e rastreamento ponta a ponta: você vê exatamente de onde vem cada real — e a gente não tem onde se esconder se algo não bater.</p>
+        </div>
+        <div class="glass-panel service-card shine tilt-card">
+          <span class="shine-bar"></span>
+          <div class="icon-chip"><span>🚀</span></div>
+          <h3 class="h3">Estratégia de Escala</h3>
+          <p>Plano de 90 dias com metas agressivas de CAC, ROAS e faturamento — e reuniões quinzenais pra dobrar a aposta no que funciona e matar o que não funciona.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTADOS REAIS -->
+  <section id="resultados" class="section">
+    <div class="section-inner">
+      <div class="sphere sphere-h" data-parallax="-0.04"></div>
+
+      <div class="section-head" data-reveal>
+        <div class="eyebrow">Direto do gerenciador de anúncios</div>
+        <h2 class="h2">Sem depoimento forjado. Print real, métrica real.</h2>
+        <p class="section-lead">Isso aqui não é "case" arrumado pra vender curso — são números tirados direto de campanhas ativas sob gestão, sem edição.</p>
+      </div>
+
+      <div class="ads-mockup glass-panel" data-reveal>
+        <div class="ads-mockup-bar">
+          <div class="ads-mockup-dots"><span></span><span></span><span></span></div>
+          <div class="ads-mockup-title">
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none"><rect width="16" height="16" rx="4" fill="#0866FF"/><path d="M11 8.06c0-1.66-1.34-3-3-3s-3 1.34-3 3c0 1.5 1.1 2.74 2.53 2.97v-2.1H6.7v-.87h.83v-.66c0-.82.49-1.27 1.23-1.27.36 0 .73.06.73.06v.8h-.41c-.41 0-.54.25-.54.51v.56h.92l-.15.87h-.77v2.1C9.9 10.8 11 9.56 11 8.06z" fill="#fff"/></svg>
+            Gerenciador de Anúncios · Campanhas
+          </div>
+          <div class="ads-mockup-daterange">2 jun 2023 – 2 jul 2026</div>
+        </div>
+        <div class="ads-table-wrap">
+          <table class="ads-table">
+            <thead>
+              <tr>
+                <th>Campanha</th>
+                <th>Veiculação</th>
+                <th>Impressões</th>
+                <th>Resultados</th>
+                <th>Freq.</th>
+                <th>CPM</th>
+                <th>CPC</th>
+                <th>CTR</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="ads-status-dot"></span>C2 · ESP</td>
+                <td>Compra no site</td>
+                <td>753</td>
+                <td>—</td>
+                <td>1,13</td>
+                <td>R$ 78,39</td>
+                <td>R$ 0,31</td>
+                <td class="ads-ctr-strong">22,97%</td>
+              </tr>
+              <tr>
+                <td><span class="ads-status-dot"></span>C1 · ESP</td>
+                <td>Compra no site</td>
+                <td>454</td>
+                <td>—</td>
+                <td>1,09</td>
+                <td>R$ 69,85</td>
+                <td>R$ 0,29</td>
+                <td class="ads-ctr-strong">21,59%</td>
+              </tr>
+              <tr>
+                <td><span class="ads-status-dot"></span>C3 · ESP</td>
+                <td>Compra no site</td>
+                <td>363</td>
+                <td>—</td>
+                <td>1,07</td>
+                <td>R$ 91,93</td>
+                <td>R$ 0,41</td>
+                <td class="ads-ctr-strong">20,94%</td>
+              </tr>
+              <tr>
+                <td><span class="ads-status-dot"></span>[EMPR][CNH][WHATS][ENGJ]</td>
+                <td>Conversas por mensagem</td>
+                <td>108</td>
+                <td>12</td>
+                <td>1,03</td>
+                <td>R$ 20,83</td>
+                <td class="ads-cpc-strong">R$ 0,14</td>
+                <td>16,67%</td>
+              </tr>
+              <tr>
+                <td><span class="ads-status-dot"></span>[EMPR][CNH][WHATS][ENGJ] · Cópia</td>
+                <td>Conversas por mensagem</td>
+                <td>931</td>
+                <td class="ads-res-strong">77</td>
+                <td>1,09</td>
+                <td>R$ 44,92</td>
+                <td>R$ 0,44</td>
+                <td>9,88%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="ads-mockup-caption">Print direto da conta — sem edição, sem esconder número ruim.</div>
+      </div>
+
+      <div class="proof-chips" data-reveal>
+        <div class="proof-chip silver-frame tilt-card"><strong>22,97%</strong><span>1 em cada 4 pessoas que viu o anúncio, clicou</span></div>
+        <div class="proof-chip silver-frame tilt-card"><strong>R$ 0,14</strong><span>o clique mais barato já registrado — a média do mercado passa de R$ 1</span></div>
+        <div class="proof-chip silver-frame tilt-card"><strong>77</strong><span>conversas no WhatsApp geradas por uma única campanha</span></div>
+        <div class="proof-chip silver-frame tilt-card"><strong>R$ 20,83</strong><span>CPM (custo pra alcançar mil pessoas) mais barato já registrado</span></div>
+      </div>
+      <p class="campaign-disclaimer">Métricas reais extraídas do Meta Ads Manager, contas sob gestão. Resultados variam por nicho, criativo e investimento — não são garantia de performance futura.</p>
+    </div>
+  </section>
+
+  <!-- MÉTODO -->
+  <section id="metodo" class="section">
+    <div class="section-inner">
+      <div class="sphere sphere-metodo" data-parallax="-0.03"></div>
+
+      <div class="section-head" data-reveal>
+        <div class="eyebrow">Como eu trabalho</div>
+        <h2 class="h2">Testo tudo. Gasto pouco. Escalo só o que já provou.</h2>
+        <p class="section-lead">Não é sorte esse CPC de R$ 0,14 lá em cima. É método: testes baratos em várias frentes, corte rápido no que não performa, munição pesada só no que já mostrou número.</p>
+      </div>
+
+      <div class="method-grid" data-reveal>
+        <div class="glass-panel method-step tilt-card">
+          <span class="method-num">1</span>
+          <h3 class="h3">Teste low-cost</h3>
+          <p>Rodo várias variações de público, criativo e oferta com investimento baixo — descubro rápido o que funciona sem queimar seu orçamento testando "no escuro".</p>
+        </div>
+        <div class="glass-panel method-step tilt-card">
+          <span class="method-num">2</span>
+          <h3 class="h3">Corte sem dó</h3>
+          <p>O que não entrega métrica boa morre em poucos dias. Sem "vamos dar mais uma chance" — dinheiro parado em anúncio ruim é dinheiro que sai do seu bolso.</p>
+        </div>
+        <div class="glass-panel method-step tilt-card">
+          <span class="method-num">3</span>
+          <h3 class="h3">Escala no que prova</h3>
+          <p>Só recebe orçamento pesado o que já mostrou CTR e custo por resultado bons de verdade. É assim que CPC de R$ 0,14 e CTR de 22% acontecem — não por sorte.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DASHBOARD EXCLUSIVA -->
+  <section id="dashboard" class="section">
+    <div class="section-inner">
+      <div class="sphere sphere-dash" data-parallax="-0.04"></div>
+
+      <div class="section-head" data-reveal>
+        <div class="eyebrow">Acompanhamento diário</div>
+        <h2 class="h2">Sua dashboard exclusiva, atualizada todo dia — sem caixa-preta.</h2>
+        <p class="section-lead">Nada de esperar relatório de fim de mês ou mandar mensagem perguntando "e aí, como tá indo?". Você recebe acesso a um painel só seu, com os números da sua conta em tempo real.</p>
+      </div>
+
+      <div class="dash-mockup glass-panel" data-reveal>
+        <div class="ads-mockup-bar">
+          <div class="ads-mockup-dots"><span></span><span></span><span></span></div>
+          <div class="ads-mockup-title">
+            <span class="dash-logo-dot"></span>
+            Painel do Cliente · Máquina
+          </div>
+          <div class="dash-live-tag"><span class="pulse-dot"></span>Sincronizado agora</div>
+        </div>
+
+        <div class="dash-stats-row">
+          <div class="dash-stat">
+            <span class="dash-stat-label">Investido hoje</span>
+            <span class="dash-stat-value">R$ 612</span>
+          </div>
+          <div class="dash-stat">
+            <span class="dash-stat-label">Resultados hoje</span>
+            <span class="dash-stat-value">38</span>
+          </div>
+          <div class="dash-stat">
+            <span class="dash-stat-label">Custo por resultado</span>
+            <span class="dash-stat-value">R$ 16,10</span>
+          </div>
+          <div class="dash-stat dash-stat-highlight">
+            <span class="dash-stat-label">CTR médio</span>
+            <span class="dash-stat-value">18,4%</span>
+          </div>
+        </div>
+
+        <div class="dash-chart">
+          <div class="dash-chart-label">Investimento vs. resultados — últimos 14 dias</div>
+          <div class="dash-bars">
+            <div style="height:32%"></div><div style="height:44%"></div><div style="height:38%"></div><div style="height:52%"></div>
+            <div style="height:48%"></div><div style="height:60%"></div><div style="height:55%"></div><div style="height:68%"></div>
+            <div style="height:62%"></div><div style="height:74%"></div><div style="height:70%"></div><div style="height:82%"></div>
+            <div style="height:78%"></div><div class="dash-bar-highlight" style="height:100%"></div>
+          </div>
+        </div>
+
+        <div class="ads-table-wrap">
+          <table class="ads-table">
+            <thead>
+              <tr><th>Campanha</th><th>Status</th><th>Investido</th><th>Resultados</th><th>Custo/resultado</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><span class="ads-status-dot"></span>Conversão · Site</td><td>Ativa</td><td>R$ 284</td><td>19</td><td>R$ 14,95</td></tr>
+              <tr><td><span class="ads-status-dot"></span>Leads · WhatsApp</td><td>Ativa</td><td>R$ 198</td><td>14</td><td>R$ 14,14</td></tr>
+              <tr><td><span class="ads-status-dot"></span>Remarketing</td><td>Ativa</td><td>R$ 130</td><td>5</td><td>R$ 26,00</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="campaign-disclaimer">Mockup ilustrativo do painel real que você recebe — layout e métricas variam conforme sua conta.</p>
+    </div>
+  </section>
+
+  <!-- SOBRE MIM -->
+  <section id="sobre" class="section">
+    <div class="section-inner">
+      <div class="bio-panel glass-panel" data-reveal>
+        <span class="avatar bio-avatar">YM</span>
+        <div class="bio-content">
+          <div class="eyebrow">Por que confiar em mim</div>
+          <h2 class="h2 h2-tight">Já faturei mais de R$ 2 milhões com tráfego pago — com o meu próprio dinheiro em jogo.</h2>
+          <p class="section-lead section-lead-left">Antes de gerir conta de cliente, rodei minha própria operação na Shopee: mais de R$ 2 milhões faturados nos últimos 2 anos e meio, testando na prática tudo que você viu até aqui. Depois disso, voltei de vez pra gestão de tráfego — a profissão que eu nunca devia ter largado. É o que eu mais gosto de fazer, e é isso que eu boto pra rodar na sua conta.</p>
+          <div class="bio-stat silver-frame">
+            <strong>R$ 2M+</strong>
+            <span>faturados na minha própria operação na Shopee, em 2 anos e meio</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="section">
+    <div class="section-inner">
+      <div class="section-head" data-reveal>
+        <div class="eyebrow">Perguntas que todo mundo faz</div>
+        <h2 class="h2">Ainda com dúvida? A gente responde.</h2>
+      </div>
+
+      <div class="faq-list" data-reveal>
+        <details class="faq-item glass-panel">
+          <summary>Já tentei tráfego pago antes e não deu certo. Por que seria diferente com vocês?<span class="faq-chevron">⌄</span></summary>
+          <p>Na maioria das vezes o problema não é "tráfego pago não funciona" — é falta de método: criativo não testado, conta sem rastreamento correto, ninguém otimizando todo dia. No diagnóstico a gente te mostra exatamente onde sua operação tá sangrando dinheiro.</p>
+        </details>
+        <details class="faq-item glass-panel">
+          <summary>Tem contrato de fidelidade?<span class="faq-chevron">⌄</span></summary>
+          <p>Não. Trabalhamos mês a mês. Você continua porque tá vendo resultado — não porque assinou um papel te prendendo.</p>
+        </details>
+        <details class="faq-item glass-panel">
+          <summary>Preciso de quanto de investimento pra começar?<span class="faq-chevron">⌄</span></summary>
+          <p>Não existe número mágico igual pra todo mundo. No diagnóstico gratuito a gente analisa seu mercado e te diz o investimento ideal pro seu momento — sem empurrar nada acima do que faz sentido pro seu caixa.</p>
+        </details>
+        <details class="faq-item glass-panel">
+          <summary>Em quanto tempo eu vejo resultado?<span class="faq-chevron">⌄</span></summary>
+          <p>Os primeiros ajustes começam a rodar já na primeira semana. Resultado consistente de ROAS geralmente aparece entre 30 e 60 dias, variando com seu mercado e o histórico da conta.</p>
+        </details>
+        <details class="faq-item glass-panel">
+          <summary>Vocês atendem o meu nicho?<span class="faq-chevron">⌄</span></summary>
+          <p>Já operamos e-commerce, clínicas, infoprodutos e serviços B2B. No diagnóstico a gente avalia se seu mercado tem fit com o método antes de prometer qualquer coisa.</p>
+        </details>
+      </div>
+
+      <div class="faq-cta" data-reveal>
+        <p>Ficou com mais alguma dúvida?</p>
+        <a href="#diagnostico" class="btn btn-glass btn-lg">Perguntar no diagnóstico gratuito</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMULÁRIO DE CAPTURA -->
+  <section id="diagnostico" class="section">
+    <div class="section-inner">
+      <div class="form-slab glass-panel shine" data-reveal>
+        <span class="shine-bar"></span>
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+
+        <div class="form-grid">
+          <div class="form-info">
+            <div class="eyebrow">Vagas quase esgotando</div>
+            <h2 class="h2 h2-tight">Descubra agora quanto dinheiro você deixa na mesa todo santo mês.</h2>
+            <p class="section-lead section-lead-left">Em 30 minutos, um estrategista sênior varre sua operação e entrega, sem enrolação:</p>
+
+            <div class="feature-list">
+              <div class="feature-row">
+                <span class="feature-num">1</span>
+                <span>Auditoria da sua conta de anúncios — ou do seu mercado, se você ainda não anuncia</span>
+              </div>
+              <div class="feature-row">
+                <span class="feature-num">2</span>
+                <span>Plano de ação de 90 dias com metas claras de CAC e ROAS</span>
+              </div>
+              <div class="feature-row">
+                <span class="feature-num">3</span>
+                <span>Projeção de investimento e retorno para escalar com segurança</span>
+              </div>
+            </div>
+
+            <div class="scarcity-line silver-frame">
+              <span class="scarcity-dot"></span>
+              <span>Só <strong>4 diagnósticos por semana</strong>. Depois disso, é fila pro mês que vem.</span>
+            </div>
+          </div>
+
+          <div class="form-col">
+            <form id="lead-form" class="lead-form glass-panel-strong">
+              <div class="form-title">Garanta sua vaga agora</div>
+
+              <label class="field">
+                <span>Nome</span>
+                <input name="nome" type="text" required placeholder="Como podemos te chamar?">
+              </label>
+              <label class="field">
+                <span>WhatsApp</span>
+                <input name="whatsapp" type="tel" inputmode="tel" required placeholder="(11) 98765-4321">
+              </label>
+              <label class="field">
+                <span>E-mail profissional</span>
+                <input name="email" type="email" required placeholder="voce@suaempresa.com.br">
+              </label>
+
+              <button type="submit" class="btn btn-primary btn-lg btn-block shine">
+                <span class="shine-bar"></span>
+                Quero minha vaga agora
+              </button>
+              <p class="fine-print">Seus dados estão seguros. Nada de spam — entramos em contato uma única vez para agendar.</p>
+            </form>
+
+            <div id="lead-success" class="lead-success glass-panel-strong" hidden>
+              <span class="success-check">✓</span>
+              <div class="success-title">Recebido, <span id="lead-name">obrigado</span>!</div>
+              <p>Nosso time vai te chamar no WhatsApp em até <strong>24h úteis</strong>. Guarda o celular por perto — sua vaga tá reservada.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <!-- FOOTER + CTA FINAL -->
+  <footer class="footer">
+    <h2 class="h1 h1-footer" data-reveal>Cansado de ver seu concorrente <span class="gradient-text">crescer sem você?</span></h2>
+    <p class="section-lead" data-reveal>Cada dia parado é dinheiro indo pro bolso de outra agência. Comece agora — o diagnóstico é 100% grátis.</p>
+    <div data-reveal>
+      <a href="#diagnostico" class="btn btn-primary btn-lg shine">
+        <span class="shine-bar"></span>
+        Quero faturar mais, agora <span class="arrow">→</span>
+      </a>
+    </div>
+
+    <div class="info-bar glass-panel shine">
+      <span class="shine-bar"></span>
+      <div class="info-brand">
+        <span class="brand-dot brand-dot-sm"></span>
+        <span class="brand-name">Máquina</span>
+        <span class="copyright">© 2026 — Gestão de Tráfego &amp; Performance</span>
+      </div>
+      <div class="info-links">
+        <a href="https://wa.me/5511962158598" target="_blank" rel="noopener">(11) 96215-8598 · WhatsApp</a>
+      </div>
+    </div>
+    <p class="legal">Os resultados citados nesta página são exemplos ilustrativos e variam conforme mercado, produto e investimento. Nenhum resultado é garantido.</p>
+  </footer>
+
+</div>
+
+<!-- BARRA FIXA DE WHATSAPP (mobile) -->
+<div class="mobile-cta-bar">
+  <a href="https://wa.me/5511962158598" target="_blank" rel="noopener" class="whatsapp-fab shine">
+    <span class="shine-bar"></span>
+    <span class="whatsapp-fab-icon" aria-hidden="true">
+      <svg viewBox="0 0 32 32" width="22" height="22" fill="#fff"><path d="M16.01 3C9.38 3 4 8.38 4 15.01c0 2.35.65 4.55 1.78 6.43L4 29l7.74-1.75a11.94 11.94 0 0 0 4.27.78h.01c6.63 0 12.01-5.38 12.01-12.01C28.03 8.38 22.65 3 16.01 3Zm0 21.9h-.01c-1.35 0-2.67-.36-3.83-1.04l-.27-.16-4.6 1.04 1.03-4.48-.18-.28a9.9 9.9 0 0 1-1.52-5.28C6.63 9.5 10.86 5.27 16.01 5.27a9.75 9.75 0 0 1 9.75 9.74c0 5.38-4.38 9.89-9.75 9.89Zm5.35-7.3c-.29-.15-1.73-.85-2-.95-.27-.1-.46-.15-.66.15-.2.29-.76.95-.93 1.14-.17.2-.34.22-.63.07-.29-.15-1.24-.46-2.36-1.46-.87-.78-1.46-1.74-1.63-2.03-.17-.29-.02-.45.13-.6.13-.13.29-.34.44-.51.15-.17.2-.29.29-.49.1-.2.05-.37-.02-.51-.07-.15-.66-1.6-.91-2.19-.24-.57-.48-.5-.66-.51h-.56c-.2 0-.51.07-.78.37-.27.29-1.02 1-1.02 2.44s1.05 2.83 1.19 3.03c.15.2 2.06 3.14 5 4.4.7.3 1.24.48 1.67.61.7.22 1.34.19 1.84.12.56-.08 1.73-.71 1.98-1.39.24-.68.24-1.27.17-1.39-.07-.12-.26-.2-.55-.34Z"/></svg>
+    </span>
+    <span class="whatsapp-fab-text">
+      <strong>Falar no WhatsApp agora</strong>
+      <span>Resposta rápida, sem enrolação</span>
+    </span>
+  </a>
+</div>
+
+<!-- POPUP DE SAÍDA -->
+<div id="exit-popup" class="exit-popup-overlay" hidden>
+  <div class="exit-popup glass-panel-strong">
+    <button type="button" class="exit-popup-close" id="exit-popup-close" aria-label="Fechar">✕</button>
+    <div class="exit-popup-eyebrow">Espera aí</div>
+    <h3 class="exit-popup-title">Antes de sair, seu diagnóstico ainda tá de graça.</h3>
+    <p class="exit-popup-body">Leva 30 segundos pra garantir sua vaga dessa semana. Se preferir, chama direto no WhatsApp — sem formulário.</p>
+    <div class="exit-popup-ctas">
+      <a href="#diagnostico" id="exit-popup-form-cta" class="btn btn-primary btn-block shine">
+        <span class="shine-bar"></span>
+        Quero meu diagnóstico grátis
+      </a>
+      <a href="https://wa.me/5511962158598" target="_blank" rel="noopener" class="btn btn-glass btn-block">Chamar no WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
